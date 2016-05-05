@@ -1,0 +1,61 @@
+.clear
+{
+	clear: both;
+}
+
+hr
+{
+	border-width: 3px;
+	border-color: #444;
+}
+
+.green
+{
+	background-color: #4DA64D;
+}
+
+.divide5
+{
+	padding-top: 5px
+}
+
+.divide15
+{
+	padding-top: 15px
+}
+
+.divide30
+{
+	padding-top: 30px
+}
+
+.divide50
+{
+	padding-top: 50px
+}
+
+.center-block
+{
+	width:300px;
+}
+
+.body_green {
+	background-color: #5cb85c;
+}
+
+.body_grass {
+	background-color: #e6f78f;
+}
+
+.body_blue_1 {
+	background-color: #043d5d;
+}
+
+.body_blue_2 {
+	background-color: #449bb5;
+}
+
+.table_white {
+	background-color: #FFFFFF;
+}
+

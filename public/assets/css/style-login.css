@@ -1,0 +1,43 @@
+.login_body {
+	background-color: #eee;
+	padding-top: 100px;
+}
+
+.login_wrapper_main {
+	width: 100%;
+}
+
+.login_wrapper {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.login_input {
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+}
+
+
+.login_wrapper .userpass {
+	margin-bottom: 20px;
+}
+
+
+.login_wrapper .checkbox {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+.divide10 {
+	margin-top: 10px;
+}
+
+.divide50 {
+	margin-top: 50px;
+}
+
+.divide150 {
+	margin-top: 150px;
+}
