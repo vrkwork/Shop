@@ -44,9 +44,6 @@ class ProfitController extends BaseController
         $begin = new \DateTime( $sdate );
         $end = new \DateTime( $edate );
 
-        // before adding plus 1 day to $end date.
-//        $sale_detail = SaleDetail::whereBetween('created_at', $begin->format("Y-m-d G:i:s"), $end->format("Y-m-d") . ' 23:59:59')->get();
-
         $end = $end->modify( '+1 day' );
 
         $interval = new \DateInterval('P1D');
@@ -55,6 +52,8 @@ class ProfitController extends BaseController
         $count = 0;
         foreach($daterange as $date){
             $profit[$count]['profit'] = Sale::whereBetween('created_at', [$date->format("Y-m-d G:i:s"), $date->format("Y-m-d") . ' 23:59:59'])->sum('profit');
+            $discount = SaleDetail::whereBetween('created_at', [$date->format("Y-m-d G:i:s"), $date->format("Y-m-d") . ' 23:59:59'])->sum('discount');
+            $profit[$count]['profit'] -= $discount;
             $profit[$count]['date'] = $date->format("Y-m-d");
             $count++;
         }
