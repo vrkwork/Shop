@@ -62,9 +62,9 @@
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('report.summary.index') }}">Report Summary</a></li>
                         <li><a href="{{ route('report.stock.index') }}">Stock Report</a></li>
-                        <li><a href="{{ route('report.sale.search_bill_id' }}">Sales Bill No.</a></li>
-                        <li><a href="">Purchase Bill No.</a></li>
-                        <li><a href="">Profit / Loss</a></li>
+                        <li><a href="{{ route('report.sale.search_bill_id') }}">Sales Bill No.</a></li>
+                        <li><a href="{{ route('report.purchase.search_bill_id') }}">Purchase Bill No.</a></li>
+                        <li><a href="{{ route('report.profit.index') }}">Profit / Loss</a></li>
                         <li><a href="">Cash / Credit</a></li>
                     </ul>
                 </li>

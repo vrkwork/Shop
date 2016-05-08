@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Report;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Sale;
+use App\Models\SaleDetail;
+use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Lang;
@@ -29,64 +32,33 @@ class ProfitController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
+        $scope = $this->scope;
+        $user = $this->user;
+        $profit = [];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $sdate = $request->get('sdate');
+        $edate = $request->get('edate');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $begin = new \DateTime( $sdate );
+        $end = new \DateTime( $edate );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // before adding plus 1 day to $end date.
+//        $sale_detail = SaleDetail::whereBetween('created_at', $begin->format("Y-m-d G:i:s"), $end->format("Y-m-d") . ' 23:59:59')->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $end = $end->modify( '+1 day' );
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $interval = new \DateInterval('P1D');
+        $daterange = new \DatePeriod($begin, $interval ,$end);
+
+        $count = 0;
+        foreach($daterange as $date){
+            $profit[$count]['profit'] = Sale::whereBetween('created_at', [$date->format("Y-m-d G:i:s"), $date->format("Y-m-d") . ' 23:59:59'])->sum('profit');
+            $profit[$count]['date'] = $date->format("Y-m-d");
+            $count++;
+        }
+
+        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'profit', 'sdate', 'edate'));
     }
 }

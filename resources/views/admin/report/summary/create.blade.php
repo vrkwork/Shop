@@ -29,13 +29,6 @@
                         <td><a href="{{ route('report.sale.index')."?sdate=".$sdate."&edate=".$edate }}"><strong>Sale</strong></a></td>
                         <td>{{ $total_sale }}</td>
                     </tr>
-                    <tr>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Profit</strong></td>
-                        <td>{{ $profit }}</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

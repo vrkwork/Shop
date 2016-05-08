@@ -71,17 +71,27 @@ class PurchaseController extends BaseController
         return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'purchase_detail', 'total_purchase'));
     }
 
-    public function single_report($id)
+    public function single_report($bill_id)
     {
         $scope = $this->scope;
         $user = $this->user;
 
+        $purchase_detail = PurchaseDetail::where('bill_id', $bill_id)->first();
+
         $purchase = Purchase::select('purchase.item_code as item_code', 'purchase.qty as qty', 'purchase.rate as rate', 'item.item_name as item_name')
             ->leftJoin('item', 'item.item_code', '=', 'purchase.item_code')
-            ->where('purchase.purchase_detail_id', $id)
+            ->where('purchase.purchase_detail_id', $purchase_detail->id)
             ->get();
 
-        return view('admin.report.' . $this->scope . '.single_report', compact('scope', 'user', 'purchase'));
+        return view('admin.report.' . $this->scope . '.single_report', compact('scope', 'user', 'purchase', 'purchase_detail'));
+    }
+
+    public function search_bill_id()
+    {
+        $scope = $this->scope;
+        $user = $this->user;
+
+        return view('admin.report.' . $this->scope . '.bill_id', compact('scope', 'user'));
     }
 
 

@@ -7,8 +7,7 @@
         <ol class="breadcrumb">
             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li><a>Report</a></li>
-            <li><a href="{{ route('report.summary.index') }}">Summary</a></li>
-            <li><a>{{ ucfirst($scope) }}</a></li>
+            <li class="active">Search {{ ucfirst($scope) }} Bill</li>
         </ol>
 
 
@@ -16,47 +15,43 @@
 
         <div class="col-sm-4 col-sm-offset-4">
             <div class="row text-center">
-                <h4>Add New {{ ucfirst($scope) }}</h4>
+                <h4>Search By {{ ucfirst($scope) }} Bill No.</h4>
             </div>
 
             <div class="divide30"></div>
 
             <div class="row">
-                <form class="form-horizontal" method="POST" action="{{ route('item.store') }}">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label class="col-sm-5 control-label">Item Code:</label>
+                <label class="col-sm-4 text-right">Bill No.:</label>
 
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text" name="item_code"
-                                   value="{{ old('item_code')?old('item_code'):'' }}" autofocus>
-                            @if($errors->has('item_code'))
-                                {{ $errors->first('item_code') }}
-                            @endif
-                        </div>
-                    </div>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" id="bill_id">
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-5 control-label">Item Name:</label>
+            <div class="divide15"></div>
 
-                        <div class="col-sm-7">
-                            <input class="form-control" type="text" name="item_name"
-                                   value="{{ old('item_name')?old('item_name'):'' }}">
-                            @if($errors->has('item_name'))
-                                {{ $errors->first('item_name') }}
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-5 col-sm-4">
-                            <button class="btn btn-primary" type="submit" name="submit">ADD</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="row">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <button class="btn btn-primary" id="submit_button">Submit</button>
+                </div>
             </div>
         </div>
 
     </div>
 
+@endsection
+
+@section('script')
+    @parent
+    <script>
+        $(document).ready(function () {
+            $('#submit_button').click(function () {
+                var url = '/report/sale/';
+
+                url += $('#bill_id').val();
+
+                location.href = url;
+            });
+        });
+    </script>
 @endsection

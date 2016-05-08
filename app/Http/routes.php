@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Purchase
         Route::get('/purchase', ['as' => 'report.purchase.create', 'uses' => 'Admin\Report\PurchaseController@create']);
         Route::get('/purchase/{id}', ['as' => 'report.purchase.single_report', 'uses' => 'Admin\Report\PurchaseController@single_report']);
+        Route::get('/purchase/search/bill_id', ['as' => 'report.purchase.search_bill_id', 'uses' => 'Admin\Report\PurchaseController@search_bill_id']);
 
         // Sale
         Route::get('/sale', ['as' => 'report.sale.index', 'uses' => 'Admin\Report\SaleController@create']);
@@ -90,8 +91,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/sale/search/bill_id', ['as' => 'report.sale.search_bill_id', 'uses' => 'Admin\Report\SaleController@search_bill_id']);
 
 
+
         // Profit
         Route::get('/profit', ['as' => 'report.profit.index', 'uses' => 'Admin\Report\ProfitController@index']);
+        Route::get('/profit/create', ['as' => 'report.profit.create', 'uses' => 'Admin\Report\ProfitController@create']);
 
         // Stock
         Route::get('/stock', ['as' => 'report.stock.index', 'uses' => 'Admin\Report\StockController@index']);

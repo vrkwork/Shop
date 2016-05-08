@@ -18,6 +18,22 @@
             <table class="table table-hover table-bordered table_white">
                 <thead>
                 <tr>
+                    <th colspan="6" class="text-center">
+                        Bill No. -> {{ $purchase_detail->bill_id }}
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2" class="text-center" style="border-right: hidden;">
+                        Name: {{ $purchase_detail->name }}
+                    </th>
+                    <th colspan="2" class="text-center" style="border-right: hidden;">
+                        Address: {{ $purchase_detail->address }}
+                    </th>
+                    <th colspan="2" class="text-center">
+                        Phone: {{ $purchase_detail->phone }}
+                    </th>
+                </tr>
+                <tr>
                     <th>SN</th>
                     <th>Item Code</th>
                     <th>Item Name</th>

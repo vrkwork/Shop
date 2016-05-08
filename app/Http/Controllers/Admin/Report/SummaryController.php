@@ -55,8 +55,8 @@ class SummaryController extends BaseController
         foreach($sales as $sale) {
             $total_sale += $sale->qty * $sale->rate;
         }
-        $profit = Sale::whereBetween('created_at', [$tmp_sdate, $tmp_edate])->sum('profit');
-        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'total_purchase', 'total_sale', 'profit', 'sdate', 'edate'));
+
+        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'total_purchase', 'total_sale', 'sdate', 'edate'));
     }
 
 

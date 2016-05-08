@@ -36,7 +36,6 @@ class SaleController extends BaseController
     {
         $scope = $this->scope;
         $user = $this->user;
-        $sale = [];
         $total_sale = [];
 
         $sdate = $request->get('sdate');
@@ -52,8 +51,6 @@ class SaleController extends BaseController
             ->get();
 
         foreach($sale_detail as $value) {
-//            $total_sale[$value->id] = Sale::where('sale_detail_id', $value->id)->sum('qty');
-
             $tmp_total_sale = DB::table('sale')
                 ->select(DB::raw('sum(qty*rate) AS total_p'))
                 ->where('sale_detail_id', $value->id)
@@ -61,29 +58,37 @@ class SaleController extends BaseController
             $total_sale[$value->id] = $tmp_total_sale[0]->total_p;
         }
 
-        /*foreach($sale_detail as $value) {
-            $sale[$value->id] = Sale::select('item_code', 'qty', 'rate')
-                ->where('sale_detail_id', $value->id)
-                ->get();
-        }*/
-
 
         return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'sale_detail', 'total_sale'));
     }
 
-    public function single_report($id)
+    public function single_report($bill_id)
     {
         $scope = $this->scope;
         $user = $this->user;
 
-        $sale = Sale::select('sale.item_code as item_code', 'sale.qty as qty', 'sale.rate as rate', 'item.item_name as item_name')
-            ->leftJoin('item', 'item.item_code', '=', 'sale.item_code')
-            ->where('sale.sale_detail_id', $id)
-            ->get();
+        $sale_detail = SaleDetail::where('bill_id', $bill_id)->first();
 
-        $sale_detail = SaleDetail::where('id', $id)->first();
+        if($sale_detail) {
+            $sale = Sale::select('sale.item_code as item_code', 'sale.qty as qty', 'sale.rate as rate', 'item.item_name as item_name')
+                ->leftJoin('item', 'item.item_code', '=', 'sale.item_code')
+                ->where('sale.sale_detail_id', $sale_detail->id)
+                ->get();
+            return view('admin.report.' . $this->scope . '.single_report', compact('scope', 'user', 'sale', 'sale_detail'));
+        } else {
+            abort(404);
+        }
 
-        return view('admin.report.' . $this->scope . '.single_report', compact('scope', 'user', 'sale', 'sale_detail'));
+
+
+    }
+
+    public function search_bill_id()
+    {
+        $scope = $this->scope;
+        $user = $this->user;
+
+        return view('admin.report.' . $this->scope . '.bill_id', compact('scope', 'user'));
     }
 
 

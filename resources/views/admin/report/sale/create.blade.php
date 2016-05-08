@@ -26,7 +26,7 @@
                 <tbody>
 
                 @foreach($sale_detail as $value)
-                    <tr onclick="redirect_link('{{ $value->id }}')">
+                    <tr onclick="redirect_link('{{ $value->bill_id }}')">
                         <td class="text-center">{{ $value->bill_id }}</td>
                         <td class="text-left">{{ $value->name }}</td>
                         <td class="text-right">{{ $total_sale[$value->id] }}</td>
@@ -47,9 +47,9 @@
     </div>
 
     <script>
-        function redirect_link(id)
+        function redirect_link(bill_id)
         {
-            var url = '{{ url('report/sale') }}' + '/' + id;
+            var url = '{{ url('report/sale') }}' + '/' + bill_id;
             location.href = url;
         }
     </script>
