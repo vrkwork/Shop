@@ -23,6 +23,11 @@
                     </th>
                 </tr>
                 <tr>
+                    <th colspan="6" class="text-center">
+                        Date -> {{ date('y-m-d', strtotime($sale_detail->created_at)) }}
+                    </th>
+                </tr>
+                <tr>
                     <th colspan="2" class="text-center" style="border-right: hidden;">
                         Name: {{ $sale_detail->name }}
                     </th>

@@ -59,7 +59,7 @@ class SaleController extends BaseController
         }
 
 
-        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'sale_detail', 'total_sale'));
+        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'sale_detail', 'total_sale', 'sdate', 'edate'));
     }
 
     public function single_report($bill_id)

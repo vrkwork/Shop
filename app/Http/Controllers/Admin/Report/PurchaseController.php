@@ -16,18 +16,6 @@ class PurchaseController extends BaseController
     protected $data;
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $scope = $this->scope;
-        $user = $this->user;
-        return view('admin.report.' . $this->scope . '.index', compact('scope', 'user'));
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,7 +24,6 @@ class PurchaseController extends BaseController
     {
         $scope = $this->scope;
         $user = $this->user;
-        $purchase = [];
         $total_purchase = [];
 
         $sdate = $request->get('sdate');
@@ -52,8 +39,6 @@ class PurchaseController extends BaseController
             ->get();
 
         foreach($purchase_detail as $value) {
-//            $total_purchase[$value->id] = Purchase::where('purchase_detail_id', $value->id)->sum('qty');
-
             $tmp_total_purchase = DB::table('purchase')
                 ->select(DB::raw('sum(qty*rate) AS total_p'))
                 ->where('purchase_detail_id', $value->id)
@@ -61,14 +46,7 @@ class PurchaseController extends BaseController
             $total_purchase[$value->id] = $tmp_total_purchase[0]->total_p;
         }
 
-        /*foreach($purchase_detail as $value) {
-            $purchase[$value->id] = Purchase::select('item_code', 'qty', 'rate')
-                ->where('purchase_detail_id', $value->id)
-                ->get();
-        }*/
-
-
-        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'purchase_detail', 'total_purchase'));
+        return view('admin.report.' . $this->scope . '.create', compact('scope', 'user', 'purchase_detail', 'total_purchase', 'sdate', 'edate'));
     }
 
     public function single_report($bill_id)

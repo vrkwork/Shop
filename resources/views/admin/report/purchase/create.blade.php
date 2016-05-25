@@ -12,15 +12,16 @@
         </ol>
 
 
-        <div class="divide30"></div>
+        {{--<div class="divide30"></div>--}}
 
         <div class="row col-sm-10 col-sm-offset-1">
             <table class="table table-hover table-bordered table_white">
+                <caption><h4>Report For Date {{ $sdate }} To {{ $edate }}</h4></caption>
                 <thead>
                 <tr>
-                    <th>Bill No</th>
-                    <th>Supplier Name</th>
-                    <th>Total</th>
+                    <th class="text-center">Bill No</th>
+                    <th class="text-center">Supplier Name</th>
+                    <th class="text-center">Total</th>
                 </tr>
                 </thead>
                 <tbody>
