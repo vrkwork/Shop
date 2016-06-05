@@ -17,7 +17,7 @@
 
         <div class="col-sm-4 col-sm-offset-4">
             <div class="row text-center">
-                <h4>Add New {{ ucfirst($scope) }}</h4>
+                <h4>{{ ucfirst($scope) }}</h4>
             </div>
 
             <div class="divide30"></div>
