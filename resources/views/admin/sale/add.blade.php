@@ -173,22 +173,11 @@
                 <div class="divide50"></div>
 
                 <div class="row">
-
                     <button class="btn btn-primary" name="add">Save</button>
-                    <button class="btn btn-warning" name="print">Print</button>
-
+                    <button class="btn btn-warning" type="button" name="print">Print</button>
+                    <button class="btn btn-danger" type="button" id="cancel_btn">Cancel</button>
                 </div>
             </form>
-
-            <div class="divide15"></div>
-
-            <div class="row">
-                <form method="get" action="{{ route($scope . '.destroyAll') }}">
-                    {{ csrf_field() }}
-                    <button class="btn btn-danger" type="submit" name="clear">Cancel</button>
-                </form>
-            </div>
-
         </div>
     </div>
 
@@ -253,6 +242,11 @@
                         $('#select_customer').html(data);
                     }
                 });
+            });
+
+            $('#cancel_btn').click(function () {
+                var url = '{{ route($scope . '.destroyAll') }}';
+                location.href = url;
             });
         });
 
